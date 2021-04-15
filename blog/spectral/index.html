@@ -74,31 +74,31 @@
             <span class="font-weight-bold">Why are we interested in filter harmonic analysis?</span>
           </h2>
           <p>Similarly to CNN, we can relate the expressive power of GCNN with the frequency response of the convolution filter. To understand why, we can have look at at the 1D convolution. The Fourier transform of a signal \(f\) is \(\hat{f}(\omega)=\int f(t) e^{-2\pi i \omega t} dt\). The Fourier transform gives us an information on the different frequencies of this signal. The convolution between a signal \(f\) and a filter \(g\) is the multiplication of these Fourier transform.</p>
-          <p>\(\begin{aligned*}
+          <p>\(\begin{aligned}
               \hat{(f * g)}(\omega) &= \hat{f}(\omega)\hat{g}(\omega) \\
               (f * g)(u)&=\int \hat{f}(\omega)\hat{g}(\omega) e^{2\pi i \omega t} d\omega \\
               &= \int f(t)g(u-t)dt
-            \end{aligned *}\)</p>
+            \end{aligned}\)</p>
           <p>Thus, the the signal will increase or decrease the frequencies of the signal. The analysis of the filter frequencies informs us on the frequency information we extract from the signal.</p>
           <h2 class="post-title">
             <span class="font-weight-bold">How do we translate this harmonic analysis of the convolution to the graph CNN?</span>
           </h2>
           <p>We can notice that the basis of function \((e^{-2\pi i \omega t})_{\omega}\) are the eigenfunction of the 1D Laplacian operator \(\Delta = -\frac{d^2}{dt^2}\). We can also notice that the Laplacian matrix \(L\) of a graph is the discrete approximation of the Laplacian operator. Thus, we can extend the Fourier transform to signal on a graph, \(\hat{f}(\omega)=\sum_{node\ i} f(i) u^*_{\omega}(i)\), where \((u_{\omega})_{\omega}\) is the eigenvector of the laplacian matrix \(L\). The inverse Fourier transform is \(f(i) = \sum_{\omega} \hat{f}(\omega) u_{\omega}(i)\). We can use this definition of the graph Fourier transform to define the graph convolution. \(f * g (i) = \sum_{\omega}f(\omega)g(\omega) u_{\omega}(i)\).</p>
-          <p>\(\begin{aligned*}
+          <p>\(\begin{aligned}
                 f * g = U diag(g(\omega)) U^T f
-              \end{aligned*}\)</p>
+              \end{aligned}\)</p>
           <p>Thus, the fourier harmonic analysis of a graph convolution filter is the analysis of the vector \(g(\omega)\), where \(\omega\) are the eigenvalues of the Laplacian.</p>
           <h2 class="post-title">
             <span class="font-weight-bold">Harmonic Analysis of localized graph filters</span>
           </h2>
           <p>In a graph CNN, we are interested in learning the coefficient \(g(\omega)\). There are two major drawbacks by doing so. The first is the learning complexity. Indeed, we learn \(O(n)\) coefficients, while for a CNN the number of coefficients is \(O(1)\). The second is that these filters are not spatially localized. To overcome these problems, one can write the filter \(g(\omega)=\sum_{s=1}^S \theta_s g_s(\omega)\), where \(\theta_s\) are the learnt parameters of the filter and \(g_s\) are functions of the eigenvalue \(\omega\). The convolution between the signal \(f\) and the filter \(g\) can be written</p>
-          <p>\(\begin{aligned*}
+          <p>\(\begin{aligned}
                 f * g = \sum_{s=1}^S U diag(g_s(\omega)) U^T f \Theta
-              \end{aligned*}\)</p>
+              \end{aligned}\)</p>
           <p>The convolution support is defined as \(C_s=U diag(g_s(\omega)) U^T\), which describes how the nodes of a neighborhood are aggregated to update the central node. We can study the expressive power of the graph CNN by studying the spectrum of the convolution support, which correspond to \(g_s(\omega)\).</p>
-          <p>\(\begin{aligned*}
+          <p>\(\begin{aligned}
                 g_s(\omega) = diag^{-1}(U^T C_s U)
-              \end{aligned*}\)</p>
+              \end{aligned}\)</p>
           <p>This analysis is well-suited for Spectral Convolution, where the convolution support is well-defined as a </p>
         </article>
       </div>
