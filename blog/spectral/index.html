@@ -70,7 +70,11 @@
             <span class="font-weight-bold">Why are we interested in filter harmonic analysis?</span>
           </h2>
           <p>Similarly to CNN, we can relate the expressive power of GCNN with the frequency response of the convolution filter. To understand why, we can have look at at the 1D convolution. The Fourier transform of a signal \(f\) is \(\hat{f}(\omega)=\int f(t) e^{-2\pi i \omega t} dt\). The Fourier transform gives us an information on the different frequencies of this signal. The convolution between a signal \(f\) and a filter \(g\) is the multiplication of these Fourier transform.</p>
-          <p>\(\begin{align} \hat{(f * g)}(\omega) &= \hat{f}(\omega)\hat{g}(\omega) \\ (f * g)(u)&=\int \hat{f}(\omega)\hat{g}(\omega) e^{2\pi i \omega t} d\omega \\ &= \int f(t)g(u-t)dt \end{align}\)</p>
+          <p>\(\begin{aligned}
+              \hat{(f * g)}(\omega) &= \hat{f}(\omega)\hat{g}(\omega) \\
+              (f * g)(u)&=\int \hat{f}(\omega)\hat{g}(\omega) e^{2\pi i \omega t} d\omega \\
+              &= \int f(t)g(u-t)dt
+            \end{aligned}\)</p>
           <p>Thus, the the signal will increase or decrease the frequencies of the signal. The analysis of the filter frequencies informs us on the frequency information we extract from the signal.</p>
           <h2 class="post-title">
             <span class="font-weight-bold">How do we translate this harmonic analysis of the convolution to the graph CNN?</span>
