@@ -76,7 +76,7 @@
           </h3>
           <p>To understand the importance of the spectral analysis of a filter, we first need to take a step back from the GNNs and speak about signal filtering. Let's take a 1D signal \(g:\mathbf{R}\longrightarrow\mathbf{C}\). This signal can be decomposed into different frequencies. The high frequency gives information about the rapidly evolving content of the signal, while the low frequency gives information about the content that stays locally constant. To decompose the signal, we use the Fourier transform:</p>
           <p style="text-align:center;">\(\begin{aligned}
-                                              \hat{g}(\omega) = \int_{t\in \mathbf{R} g(t) e^{-2\pi i \omega t} dt,\ \forall \omega \in \mathbf{R}
+                                              \hat{g}(\omega) = \int_{t\in \mathbf{R}} g(t) e^{-2\pi i \omega t} dt,\ \forall \omega \in \mathbf{R}
                                             \end{aligned}\)</p>
           <p>where \(\omega\) is the signal frequency. A high value \(|\hat{g}(\omega)|\) indicates that \(g\) encodes some information that oscillates at frequency \(\omega\).</p>
           <p>Now, let's take a 1D filter \(f:\mathbf{R}\longrightarrow\mathbf{C}\). We can notice that the Fourier transform of the convolution between the filter and the signal is a multiplcation in the spectral domain:</p>
