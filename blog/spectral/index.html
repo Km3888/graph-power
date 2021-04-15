@@ -33,9 +33,12 @@
         onload="renderMathInElement(document.body);"></script>
   </head>
   <body class="fixed-top-nav ">
+    <!-- Header -->
     <header>
+      <!-- Nav Bar -->
       <nav id="navbar" class="navbar navbar-light bg-white navbar-expand-sm fixed-top">
         <div class="container">
+          <!-- Navbar Toogle -->
           <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar top-bar"></span>
@@ -45,15 +48,36 @@
           <div class="collapse navbar-collapse text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto flex-nowrap">
               <!-- About -->
-              <li class="nav-item active">
+              <li class="nav-item">
                 <a class="nav-link" href="/graph-power/">
-                  About
-                    <span class="sr-only">(current)</span>
+                  Abstract
+                </a>
+              </li>
+              <!-- Blog -->
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/UAT/">
+                  UAT
                 </a>
               </li>
               <li class="nav-item ">
-                <a class="nav-link" href="/graph-power/blog/">
-                  Blog
+                <a class="nav-link" href="/graph-power/blog/GIT/">
+                  GIT
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/topo/">
+                  Topology
+                </a>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link" href="/graph-power/blog/combinatorial/">
+                  Combinatorial Problem
+                </a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/graph-power/blog/spectral/">
+                  Spectral Analysis
+                  <span class="sr-only">(current)</span>
                 </a>
               </li>
             </ul>
@@ -105,9 +129,9 @@
                                               &f * g = U diag(f(\mathbf{\lambda})) U^T g
                                             \end{aligned}\)</p>
           <p>Thus, the fourier harmonic analysis of a graph convolution filter is the analysis of the vector \(g(\mathbf{\lambda})\).</p>
-          <h2 class="post-title">
+          <h3 class="post-title">
             <span class="font-weight-bold">Harmonic Analysis of localized graph filters</span>
-          </h2>
+          </h3>
           <p>In a graph CNN, we are interested in learning the coefficient \(g(\omega)\). There are two major drawbacks by doing so. The first is the learning complexity. Indeed, we learn \(O(n)\) coefficients, while for a CNN the number of coefficients is \(O(1)\). The second is that these filters are not spatially localized. To overcome these problems, one can write the filter \(g(\omega)=\sum_{s=1}^S \theta_s g_s(\omega)\), where \(\theta_s\) are the learnt parameters of the filter and \(g_s\) are functions of the eigenvalue \(\omega\). The convolution between the signal \(f\) and the filter \(g\) can be written</p>
           <p>\(\begin{aligned}
                 f * g = \sum_{s=1}^S U diag(g_s(\omega)) U^T f \Theta

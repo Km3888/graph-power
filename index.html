@@ -1,175 +1,186 @@
 <!DOCTYPE html>
 <html>
-
   <head>
-    <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Graph Expressive Power</title>
+    <meta name="description" content="Project Overview. Based on [*folio](https://github.com/bogoli/-folio) design.">
+    <!-- Bootstrap & MDB -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
+    <!-- Styles -->
+    <link rel="shortcut icon" href="/graph-power/assets/img/favicon.ico">
+    <link rel="stylesheet" href="/graph-power/assets/css/main.css">
 
-<title>Graph Expressive Power</title>
-<meta name="description" content="Project Overview. Based on [*folio](https://github.com/bogoli/-folio) design.
-">
-
-<!-- Bootstrap & MDB -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha512-MoRNloxbStBcD8z3M/2BmnT+rg4IsMxPkXaGh2zD6LGNNFE80W3onsAhRcMAMrSoyWL9xD7Ert0men7vR8LUZg==" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" integrity="sha512-RO38pBRxYH3SoOprtPTD86JFOclM51/XTIdEPh5j8sj4tp8jmQIx26twG52UaLi//hQldfrh7e51WzP9wuP32Q==" crossorigin="anonymous" />
-
-<!-- Fonts & Icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"  integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
-
-<!-- Styles -->
-<link rel="shortcut icon" href="/graph-power/assets/img/favicon.ico">
-<link rel="stylesheet" href="/graph-power/assets/css/main.css">
-
-<link rel="canonical" href="/">
-
-<!-- Open Graph -->
-
-
-<link type="text/css" href="/graph-power/assets/css/magnifier.css" rel="stylesheet">
-<script type="text/javascript" src="/graph-power/assets/js/magnifier.js"></script>
+    <link rel="canonical" href="/graph-power/">
+    <link type="text/css" href="/graph-power/assets/css/magnifier.css" rel="stylesheet">
+    <script type="text/javascript" src="/graph-power/assets/js/magnifier.js"></script>
   </head>
 
   <body class="fixed-top-nav ">
-
     <!-- Header -->
-
     <header>
+      <!-- Nav Bar -->
+      <nav id="navbar" class="navbar navbar-light bg-white navbar-expand-sm fixed-top">
+        <div class="container">
+          <!-- Navbar Toogle -->
+          <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse text-right" id="navbarNav">
+            <ul class="navbar-nav ml-auto flex-nowrap">
+              <!-- About -->
+              <li class="nav-item active">
+                <a class="nav-link" href="/graph-power/">
+                  Abstract
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <!-- Blog -->
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/UAT/">
+                  UAT
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/GIT/">
+                  GIT
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/topo/">
+                  Topology
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/combinatorial/">
+                  Combinatorial Problem
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/graph-power/blog/spectral/">
+                  Spectral Analysis
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
 
-    <!-- Nav Bar -->
-    <nav id="navbar" class="navbar navbar-light bg-white navbar-expand-sm fixed-top">
-    <div class="container">
-      
-      <!-- Navbar Toogle -->
-      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar top-bar"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
-      <div class="collapse navbar-collapse text-right" id="navbarNav">
-        <ul class="navbar-nav ml-auto flex-nowrap">
-          <!-- About -->
-          <li class="nav-item active">
-            <a class="nav-link" href="/graph-power/">
-              About
-                <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          
-          <!-- Blog -->
-          <li class="nav-item ">
-            <a class="nav-link" href="/graph-power/blog/">
-              Blog
-            </a>
-          </li>
-          
-          <!-- Other pages -->
-        </ul>
+    <!-- Content -->
+    <div class="container mt-5">
+      <div class="post">
+        <header class="post-header">
+          <h1 class="post-title">
+            <span class="font-weight-bold">Graph Expressive Power</span>
+          </h1>
+        </header>
+        <article>
+          <div class="clearfix">
+            <p>A review of current work on the expressive power of Graph Neural Network</p>
+          </div>
+
+          <div class="abstract">
+            <h2>Abstract</h2>
+            <p>The study of Graph Neural Networks (GNNs) has received considerable interest in the past few years. By extending deep learning to graph-structured data, GNNs can solve a diverse set of tasks in fields including social science, chemistry, and medicine. The development of GNN architectures has largely been focused on improving empirical performance on tasks like node or graph classification. However, a line of recent work has instead sought to find GNN architectures that have desirable theoretical properties - by studying their expressive power and designing architectures that maximize this expressiveness.</p>
+            <p>While there is no consensus on the best way to define the expressiveness of a GNN, it can be viewed from several well-motivated perspectives. Perhaps the most natural approach is to study the universal approximation properties of GNNs, much in the way that this has been studied extensively for MLPs. Another direction focuses on the extent to which GNNs can distinguish between different graph structures, relating this to the graph isomorphism test. Besides, a GNN’s ability to compute graph properties such as graph moments has been suggested as another form of expressiveness. All of these different definitions are complementary and have yielded different recommendations for GNN architecture choices. In this review paper, we would like to give an overview of the notion of ”expressive power” of GNNs and provide some valuable insights regarding the design choices of GNNs.</p>
+          </div>
+
+          <div class="table-responsive">
+            <table class="table table-sm table-borderless">
+              <tr>
+                <th scope="row"><a class="nav-link" href="/graph-power/blog/UAT/">
+                  The Universal Approximation Theorem
+                </a></th>
+                <td>We will study the expressive power of a GNN as the ability to learn/approximate a set of functions on graphs. We have three ideas to explore: the universality of GNNs for measurable functions, the Boolean universality of GNNs, and the Turing universality of GNNs.</td>
+              </tr>
+
+              <tr>
+                <th scope="row"><a class="nav-link" href="/graph-power/blog/GIT/">
+                  The Graph Isomorphism Test
+                </a></th>
+                <td>A GNN is powerful if it can distinguish two different graphs. We want to introduce the Weisfeiler-Lehman test and the expressive power of a GNN as its ability to distinguish non-isomorphic graphs.</td>
+              </tr>
+
+              <tr>
+                <th scope="row"><a class="nav-link" href="/graph-power/blog/topo/">
+                  Graph topology / Graph Properties
+                </a></th>
+                <td>A third view of the expressive power of a GNN is its ability to learn the properties of a graph.</td>
+              </tr>
+
+              <tr>
+                <th scope="row"><a class="nav-link" href="/graph-power/blog/combinatorial/">
+                  Combinatorial Problems
+                </a></th>
+                <td>Combinatorial problems can be NP-hard, but approximation algorithms can solve them in a polynomial time. In this section, we will present the expressive power of a GNN as its ability to approximate such problems in polynomial time.</td>
+              </tr>
+
+              <tr>
+                <th scope="row"><a class="nav-link" href="/graph-power/blog/spectral/">
+                  Spectral Analysis
+                </a></th>
+                <td>While most of the previous lines of work present the expressive power as the ability to solve a task, we want to present a spectral view of this notion. Indeed, a GNN will have a better expressivity if it works with low-pass, band-pass, and high-pass filters.</td>
+              </tr>
+
+            </table>
+          </div>
+        </article>
       </div>
     </div>
-  </nav>
-
-</header>
-<!-- Content -->
-<div class="container mt-5">
-  <div class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        <span class="font-weight-bold">Graph Expressive Power</span>
-      </h1>
-    </header>
-      <article>
-        <div class="clearfix">
-          <p>A review of current work on the expressive power of Graph Neural Network</p>
-        </div>
-    
-        <div class="abstract">
-          <h2>Abstract</h2>
-          <p>The study of Graph Neural Networks (GNNs) has received considerable interest in the past few years. By extending deep learning to graph-structured data, GNNs can solve a diverse set of tasks in fields including social science, chemistry, and medicine. The development of GNN architectures has largely been focused on improving empirical performance on tasks like node or graph classification. However, a line of recent work has instead sought to find GNN architectures that have desirable theoretical properties - by studying their expressive power and designing architectures that maximize this expressiveness.</p>
-          <p>While there is no consensus on the best way to define the expressiveness of a GNN, it can be viewed from several well-motivated perspectives. Perhaps the most natural approach is to study the universal approximation properties of GNNs, much in the way that this has been studied extensively for MLPs. Another direction focuses on the extent to which GNNs can distinguish between different graph structures, relating this to the graph isomorphism test. Besides, a GNN’s ability to compute graph properties such as graph moments has been suggested as another form of expressiveness. All of these different definitions are complementary and have yielded different recommendations for GNN architecture choices. In this review paper, we would like to give an overview of the notion of ”expressive power” of GNNs and provide some valuable insights regarding the design choices of GNNs.</p>
-        </div>
-      
-        <div class="table-responsive">
-          <table class="table table-sm table-borderless">
-            <tr>
-              <th scope="row">The Universal Approximation Theorem</th>
-              <td>We will study the expressive power of a GNN as the ability to learn/approximate a set of functions on graphs. We have three ideas to explore: the universality of GNNs for measurable functions, the Boolean universality of GNNs, and the Turing universality of GNNs.</td>
-            </tr>
-
-            <tr>
-              <th scope="row">The Graph Isomorphism Test</th>
-              <td>A GNN is powerful if it can distinguish two different graphs. We want to introduce the Weisfeiler-Lehman test and the expressive power of a GNN as its ability to distinguish non-isomorphic graphs.</td>
-            </tr>
-
-            <tr>
-              <th scope="row">Graph topology / Graph Properties</th>
-              <td>A third view of the expressive power of a GNN is its ability to learn the properties of a graph.</td>
-            </tr>
-
-            <tr>
-              <th scope="row">Combinatorial Problems</th>
-              <td>Combinatorial problems can be NP-hard, but approximation algorithms can solve them in a polynomial time. In this section, we will present the expressive power of a GNN as its ability to approximate such problems in polynomial time.</td>
-            </tr>
-
-            <tr>
-              <th scope="row"><a class="nav-link" href="/graph-power/blog/spectral/">
-                Spectral Analysis
-              </a></th>
-              <td>While most of the previous lines of work present the expressive power as the ability to solve a task, we want to present a spectral view of this notion. Indeed, a GNN will have a better expressivity if it works with low-pass, band-pass, and high-pass filters.</td>
-            </tr>
-
-          </table>
-        </div>
-      </article>
-    </div>
-  </div>
     <!-- Footer -->
-  <footer class="fixed-bottom">
-    <div class="container mt-0">
-      &copy; Copyright 2021 Axel Elald.
-      Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-    </div>
-  </footer>
+    <footer class="fixed-bottom">
+      <div class="container mt-0">
+        &copy; Copyright 2021 Axel Elald.
+        Powered by <a href="http://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme. Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
+      </div>
+    </footer>
+  </body>
 
-</body>
+    <!-- Load Core and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"  integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
 
-  <!-- Load Core and Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha512-/DXTXr6nQodMUiq+IUJYCt2PPOUjrHJ9wFrqpJ3XkgPNOZVfMok7cRw6CSxyCQxXn6ozlESsSh1/sMCTF1rL/g==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.4/umd/popper.min.js" integrity="sha512-eUQ9hGdLjBjY3F41CScH3UX+4JDSI9zXeroz7hJ+RteoCaY+GP/LDoM8AO+Pt+DRFw3nXqsjh9Zsts8hnYv8/A==" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha512-M5KW3ztuIICmVIhjSqXe01oV2bpe248gOxqmlcYrEzAvws7Pw3z6BK0iGbrwvdrUQUhi3eXgtxp5I8PDo9YfjQ==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"  integrity="sha512-Mug9KHKmroQFMLm93zGrjhibM2z2Obg9l6qFG2qKjXEXkMp/VDkI4uju9m4QKPjWSwQ6O2qzZEnJDEeCw0Blcw==" crossorigin="anonymous"></script>
+  <!-- Load Common JS -->
+  <script src="/graph-power/assets/js/common.js"></script>
 
-<!-- Load Common JS -->
-<script src="/graph-power/assets/js/common.js"></script>
-
-<!-- Code Syntax Highlighting -->
-<link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
-
-
-<!-- Load KaTeX -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-<script src="/graph-power/assets/js/katex.js"></script>
+  <!-- Code Syntax Highlighting -->
+  <link rel="stylesheet" href="https://gitcdn.link/repo/jwarby/jekyll-pygments-themes/master/github.css" />
 
 
+  <!-- Load KaTeX -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+  <script src="/graph-power/assets/js/katex.js"></script>
 
-<!-- Load Mansory & imagesLoaded -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 
-<!-- Project Cards Layout -->
-<script type="text/javascript">
-  // Init Masonry
-  var $grid = $('.grid').masonry({
-    gutter: 10,
-    horizontalOrder: true,
-    itemSelector: '.grid-item',
-  });
-  // layout Masonry after each image loads
-  $grid.imagesLoaded().progress( function() {
-    $grid.masonry('layout');
-  });
-</script>
+
+  <!-- Load Mansory & imagesLoaded -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.2.2/masonry.pkgd.min.js" integrity="" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+
+  <!-- Project Cards Layout -->
+  <script type="text/javascript">
+    // Init Masonry
+    var $grid = $('.grid').masonry({
+      gutter: 10,
+      horizontalOrder: true,
+      itemSelector: '.grid-item',
+    });
+    // layout Masonry after each image loads
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
+    });
+  </script>
+</html>
