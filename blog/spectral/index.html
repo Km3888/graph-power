@@ -66,20 +66,24 @@
       <div class="post">
         <header class="post-header">
           <h1 class="post-title">
-            <span class="font-weight-bold">Harmonic Analysis of Graph CNN</span>
+            <span class="font-weight-bold">A Fourier Analysis Approach of Graph Neural Network Expressive Power</span>
           </h1>
         </header>
         <article>
-          <h2 class="post-title">
-            <span class="font-weight-bold">Why are we interested in filter harmonic analysis?</span>
-          </h2>
-          <p>Similarly to CNN, we can relate the expressive power of GCNN with the frequency response of the convolution filter. To understand why, we can have look at at the 1D convolution. The Fourier transform of a signal \(f\) is \(\hat{f}(\omega)=\int f(t) e^{-2\pi i \omega t} dt\). The Fourier transform gives us an information on the different frequencies of this signal. The convolution between a signal \(f\) and a filter \(g\) is the multiplication of these Fourier transform.</p>
-          <p>\(\begin{aligned}
-              \hat{(f * g)}(\omega) &= \hat{f}(\omega)\hat{g}(\omega) \\
-              (f * g)(u)&=\int \hat{f}(\omega)\hat{g}(\omega) e^{2\pi i \omega t} d\omega \\
-              &= \int f(t)g(u-t)dt
-            \end{aligned}\)</p>
-          <p>Thus, the the signal will increase or decrease the frequencies of the signal. The analysis of the filter frequencies informs us on the frequency information we extract from the signal.</p>
+          <p>In the previoux topics, we have looked at the expressive power of a GNN as the ability to solve a task. While these properties are informative about the network abilities, they are extrinsic. Ideed, the expressive power of the network is always linked to its ability to work on a problem or approximate a function. Hopefully, a current line of work propose to analyze an intrinsic property of the GNNs, which is the spectral filtering power of the network filters</p>
+          <h3 class="post-title">
+            <span class="font-weight-bold">Why spectral filtering as a expressive power property?</span>
+          </h3>
+          <p>To understand the importance of the spectral analysis of a filter, we first need to take a step back from the GNNs and speak about signal filtering. Let's take a 1D signal \(g:\mathbf{R}\longrightarrow\mathbf{C}\). This signal can be decomposed into different frequencies. The high frequency gives information about the rapidly evolving content of the signal, while the low frequency gives information about the content that stays locally constant. To decompose the signal, we use the Fourier transform:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              \hat{g}(\omega) = \int_{t\in \mathbf{R} g(t) e^{-2\pi i \omega t} dt,\ \forall \omega \in \mathbf{R}
+                                            \end{aligned}\)</p>
+          <p>where \(\omega\) is the signal frequency. A high value \(|\hat{g}(\omega)|\) indicates that \(g\) encodes some information that oscillates at frequency \(\omega\).</p>
+          <p>Now, let's take a 1D filter \(f:\mathbf{R}\longrightarrow\mathbf{C}\). We can notice that the Fourier transform of the convolution between the filter and the signal is a multiplcation in the spectral domain:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              \hat{(f * g)}(\omega) = \hat{f}(\omega)\hat{g}(\omega),\ \forall \omega \in \mathbf{R}
+                                            \end{aligned}\)</p>
+          <p>Thus, convolving the signal \(g\) with the filter \(f\) is equivalent to a frequency selection. The filter \(f\) increases or decreases the frequency components of the signal. A filter can extract different information from a signal, focusing on some part of the signal spectrum. As a consequence, we can speak about the expressive power of a set of filter \(\{f\}_s\) as the spectrum range that they cover. The analysis of the filter frequencies informs us on the frequency information these filters can extract from the signal.</p>
           <h2 class="post-title">
             <span class="font-weight-bold">How do we translate this harmonic analysis of the convolution to the graph CNN?</span>
           </h2>
