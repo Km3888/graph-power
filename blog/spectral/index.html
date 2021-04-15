@@ -70,7 +70,7 @@
           </h1>
         </header>
         <article>
-          <p>In the previoux topics, we have looked at the expressive power of a GNN as the ability to solve a task. While these properties are informative about the network abilities, they are extrinsic. Ideed, the expressive power of the network is always linked to its ability to work on a problem or approximate a function. Hopefully, a current line of work propose to analyze an intrinsic property of the GNNs, which is the spectral filtering power of the network filters</p>
+          <p>In the previoux topics, we have looked at the expressive power of a GNN as the ability to solve a task. While these properties are informative about the network abilities, they are extrinsic. Indeed, the expressive power of the network is linked to its ability to work on a problem or approximate a function. Hopefully, a current line of work propose to analyze an intrinsic property of the GNNs, which is the spectral filtering power of the network filters.</p>
           <h3 class="post-title">
             <span class="font-weight-bold">Why spectral filtering as a expressive power property?</span>
           </h3>
@@ -78,20 +78,33 @@
           <p style="text-align:center;">\(\begin{aligned}
                                               \hat{g}(\omega) = \int_{t\in \mathbf{R}} g(t) e^{-2\pi i \omega t} dt,\ \forall \omega \in \mathbf{R}
                                             \end{aligned}\)</p>
-          <p>where \(\omega\) is the signal frequency. A high value \(|\hat{g}(\omega)|\) indicates that \(g\) encodes some information that oscillates at frequency \(\omega\).</p>
-          <p>Now, let's take a 1D filter \(f:\mathbf{R}\longrightarrow\mathbf{C}\). We can notice that the Fourier transform of the convolution between the filter and the signal is a multiplcation in the spectral domain:</p>
+          <p>where \(\omega\) is the signal frequency. A relative high \(|\hat{g}(\omega)|\) value indicates that \(g\) encodes some significante information that oscillates at frequency \(\omega\).</p>
+          <p>Now, let's take a 1D filter \(f:\mathbf{R}\longrightarrow\mathbf{C}\). We can notice that the Fourier transform of the convolution between the filter and the signal is a multiplication in the spectral domain:</p>
           <p style="text-align:center;">\(\begin{aligned}
                                               \hat{(f * g)}(\omega) = \hat{f}(\omega)\hat{g}(\omega),\ \forall \omega \in \mathbf{R}
                                             \end{aligned}\)</p>
           <p>Thus, convolving the signal \(g\) with the filter \(f\) is equivalent to a frequency selection. The filter \(f\) increases or decreases the frequency components of the signal. A filter can extract different information from a signal, focusing on some part of the signal spectrum. As a consequence, we can speak about the expressive power of a set of filter \(\{f\}_s\) as the spectrum range that they cover. The analysis of the filter frequencies informs us on the frequency information these filters can extract from the signal.</p>
-          <h2 class="post-title">
-            <span class="font-weight-bold">How do we translate this harmonic analysis of the convolution to the graph CNN?</span>
-          </h2>
-          <p>We can notice that the basis of function \((e^{-2\pi i \omega t})_{\omega}\) are the eigenfunction of the 1D Laplacian operator \(\Delta = -\frac{d^2}{dt^2}\). We can also notice that the Laplacian matrix \(L\) of a graph is the discrete approximation of the Laplacian operator. Thus, we can extend the Fourier transform to signal on a graph, \(\hat{f}(\omega)=\sum_{node\ i} f(i) u^*_{\omega}(i)\), where \((u_{\omega})_{\omega}\) is the eigenvector of the laplacian matrix \(L\). The inverse Fourier transform is \(f(i) = \sum_{\omega} \hat{f}(\omega) u_{\omega}(i)\). We can use this definition of the graph Fourier transform to define the graph convolution. \(f * g (i) = \sum_{\omega}f(\omega)g(\omega) u_{\omega}(i)\).</p>
-          <p>\(\begin{aligned}
-                f * g = U diag(g(\omega)) U^T f
-              \end{aligned}\)</p>
-          <p>Thus, the fourier harmonic analysis of a graph convolution filter is the analysis of the vector \(g(\omega)\), where \(\omega\) are the eigenvalues of the Laplacian.</p>
+          <h3 class="post-title">
+            <span class="font-weight-bold">How spectral filtering work on graph?</span>
+          </h3>
+          <p>To apply the same Fourier analysis to graph filter, we need to extend the definition of Fourier transform to graph signal. This is nicely done by using the relation between the 1D Laplacian operator \(\Delta = -\frac{d^2}{dt^2}\) and the Fourier basis \(\{e^{-2\pi i \omega t}\}\):</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              \Delta  e^{-2\pi i \omega t} = (2 \pi \omega)^2 e^{-2\pi i \omega t},\ \forall \omega \in \mathbf{R},\ \forall t \in \mathbf{R}
+                                            \end{aligned}\)</p>
+          <p>The Fourier basis are the eigenfunctions of the 1D Laplacian operator, where each eigenfunction \(e^{-2\pi i \omega t}\) is associated to the eigenvalue \((2 \pi \omega)^2\). The Laplacian matrix \(L\) of a graph is the discrete approximation of the Laplacian operator, and as a symmetric positive definite nmatrix, we can find its real eigenvalues \(\mathbf{\lambda}=\{\lambda_1,...,\lambda_n\}\) and eigenvectors \(\mathbf{U}=\{U_{lambda_1},...,U_{lambda_n}\}\).</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              \mathbf{L} = \mathbf{U}^T diag(\mathbf{\lambda}) \mathbf{U}
+                                            \end{aligned}\)</p>
+          <p>Thus, we can extend the Fourier transform to signal on a graph:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              \(\hat{g}(\lambda)=\sum_{i} g(i) u_{\lambda}(i)\),\ \forall \lambda \in \mathbf{\lambda}
+                                            \end{aligned}\)</p>
+          <p>We can use this definition of the graph Fourier transform to define the graph convolution.</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              &(f * g) (i) = \sum_{\lambda}f(\lambda)g(\lambda) u_{\lambda}(i),\ \forall i \in \mathcal{V} \\
+                                              &f * g = U diag(f(\mathbf{\lambda})) U^T g
+                                            \end{aligned}\)</p>
+          <p>Thus, the fourier harmonic analysis of a graph convolution filter is the analysis of the vector \(g(\mathbf{\lambda})\).</p>
           <h2 class="post-title">
             <span class="font-weight-bold">Harmonic Analysis of localized graph filters</span>
           </h2>
