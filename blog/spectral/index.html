@@ -115,32 +115,169 @@
           <p style="text-align:center;">\(\begin{aligned}
                                               \Delta  e^{-2\pi i \omega t} = (2 \pi \omega)^2 e^{-2\pi i \omega t},\ \forall \omega \in \mathbf{R},\ \forall t \in \mathbf{R}
                                             \end{aligned}\)</p>
-          <p>The Fourier basis are the eigenfunctions of the 1D Laplacian operator, where each eigenfunction \(e^{-2\pi i \omega t}\) is associated to the eigenvalue \((2 \pi \omega)^2\). The Laplacian matrix \(L\) of a graph is the discrete approximation of the Laplacian operator, and as a symmetric positive definite nmatrix, we can find its real eigenvalues \(\mathbf{\lambda}=\{\lambda_1,...,\lambda_n\}\) and eigenvectors \(\mathbf{U}=\{U_{lambda_1},...,U_{lambda_n}\}\).</p>
+          <p>The Fourier basis are the eigenfunctions of the 1D Laplacian operator, where each eigenfunction \(e^{-2\pi i \omega t}\) oscillating at frequency \(\omega\) is associated to the eigenvalue \((2 \pi \omega)^2\).</p>
+          <p>For signal living on a graph, we need to discretize the Laplacian operator through the Laplacian matrix \(L\) of the graph. This matrix depends on the graph and can tak different forms. For example, the normalized Lapalcian is widely used:</p>
           <p style="text-align:center;">\(\begin{aligned}
-                                              \mathbf{L} = \mathbf{U}^T diag(\mathbf{\lambda}) \mathbf{U}
-                                            \end{aligned}\)</p>
-          <p>Thus, we can extend the Fourier transform to signal on a graph:</p>
+            \mathbf{L} = \mathbf{I} - \mathbf{D}^{-1/2}\mathbf{A}\mathbf{D}^{-1/2}
+            \end{aligned}\)</p>
+          <p> where \(\mathbf{I}\) is the identity matrix of size \(n\) the number of nodes, \(\mathbf{A}\) is the adjacency matrix and \(\mathbf{D}\) is the diagonal degree matrix. The normalized Laplacian has the nice property to have its eigenvalues in the range of \([0, 2]\).</p>
+            <p>We can do a similar analysis of the 1D Laplacian operator, and find the eigenvectors of \(\mathbf{L}\). The Laplacian matrix is symmetric positive definite, and thus has real and positive eigenvalues \(\mathbf{\Lambda}=\{0=\lambda_1 \leq...\leq\lambda_n\}\) associated to real orthonormal eigenvectors \(\mathbf{U}=\{U_{\lambda_1},...,U_{\lambda_n}\}\).</p>
           <p style="text-align:center;">\(\begin{aligned}
-                                              \hat{g}(\lambda)=\sum_{i} g(i) u_{\lambda}(i),\ \forall \lambda \in \mathbf{\lambda}
-                                            \end{aligned}\)</p>
-          <p>We can use this definition of the graph Fourier transform to define the graph convolution.</p>
+            \mathbf{L} = \mathbf{U}^T diag(\mathbf{\Lambda}) \mathbf{U}
+            \end{aligned}\)</p>
+          <p>For a small eigenvalue \(\lambda\), the eigenfunction \(U_\lambda\) is a smooth signal on the graph, with low variation between two neighboring nodes. For a high eigenvalue \(\lambda\), the eigenfunction \(U_\lambda\) is a signal on the graph wit high variability between two neighboring nodes. We can see the eigenvalues as the graph frequencies and the associated eigenvectors as the Fourier basis for the graph signals.</p>
+          <p>With this analogy in mind, we can extend the Fourier transform to signals on a graph. Let's take a signal \(g \in \mathbf{R}^n\), wich is a vector of size \(n\) with one value per node. Its Fourier transform is:</p>
           <p style="text-align:center;">\(\begin{aligned}
-                                              &(f * g) (i) = \sum_{\lambda}f(\lambda)g(\lambda) u_{\lambda}(i),\ \forall i \in \mathcal{V} \\
-                                              &f * g = U diag(f(\mathbf{\lambda})) U^T g
+            \hat{g}(\lambda)&=\sum_{i} g(i) U_{\lambda}(i),\ \forall \lambda \in \mathbf{\Lambda} \\
+            \hat{g} &= \mathbf{U}^T g
+            \end{aligned}\)</p>
+          <p>Then, the graph convolution arises naturally from its spectral definition. Let \(f \in \mathbf{R}^n\) be a graph filter. The Fourier transform of the convolution between \(f\) and \(g\) is: </p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              \hat{(f * g)}(\lambda) = \hat{f}(\lambda)\hat{g}(\lambda),\ \forall \lambda \in \mathbf{\Lambda}
                                             \end{aligned}\)</p>
-          <p>Thus, the fourier harmonic analysis of a graph convolution filter is the analysis of the vector \(g(\mathbf{\lambda})\).</p>
+          <p>Then, taking the inverse Fourier transform gives us the final convolution:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                                              (f * g) (i) &= \sum_{\lambda}\hat{f}(\lambda)\hat{g}(\lambda) U_{\lambda}(i),\ \forall i \in \mathcal{V} \\
+                                              f * g &= \mathbf{U} diag(\hat{f}(\mathbf{\Lambda})) \mathbf{U}^T g
+                                            \end{aligned}\)</p>
+          <p>We can extend the Fourier analysis of 1D filter to graph filter, studying the vector \(\hat{f}(\mathbf{\Lambda})\).</p>
           <h3 class="post-title">
             <span class="font-weight-bold">Harmonic Analysis of localized graph filters</span>
           </h3>
-          <p>In a graph CNN, we are interested in learning the coefficient \(g(\omega)\). There are two major drawbacks by doing so. The first is the learning complexity. Indeed, we learn \(O(n)\) coefficients, while for a CNN the number of coefficients is \(O(1)\). The second is that these filters are not spatially localized. To overcome these problems, one can write the filter \(g(\omega)=\sum_{s=1}^S \theta_s g_s(\omega)\), where \(\theta_s\) are the learnt parameters of the filter and \(g_s\) are functions of the eigenvalue \(\omega\). The convolution between the signal \(f\) and the filter \(g\) can be written</p>
-          <p>\(\begin{aligned}
-                f * g = \sum_{s=1}^S U diag(g_s(\omega)) U^T f \Theta
+          <p>In a spectral graph CNN, we are interested in learning the coefficient \(\hat{f}(\Lambda)\). There are two major drawbacks by doing so. The first is the learning complexity. Indeed, we learn \(O(n)\) coefficients, while for a traditional CNN the number of coefficients is \(O(1)\). The second is that these filters are not spatially localized. To overcome these problems, one can write the filter as a weighted sum of localized filters:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+            \hat{f}(\Lambda)=\sum_{s=1}^S \theta_s \hat{f}_s(\Lambda)
+            \end{aligned}\)</p>
+          <p>where \(\theta_s \in \mathbf{R}\) are the learnt parameters of the filter and \(g_s\) are known functions of the eigenvalue \(\lambda\) wit possible learnt parameters independent of the number of nodes. Introducing this filter into the convolution gives:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                f * g = \sum_{s=1}^S \theta_s \mathbf{U} diag(\hat{f}_s(\Lambda)) \mathbf{U}^T g
               \end{aligned}\)</p>
-          <p>The convolution support is defined as \(C_s=U diag(g_s(\omega)) U^T\), which describes how the nodes of a neighborhood are aggregated to update the central node. We can study the expressive power of the graph CNN by studying the spectrum of the convolution support, which correspond to \(g_s(\omega)\).</p>
-          <p>\(\begin{aligned}
-                g_s(\omega) = diag^{-1}(U^T C_s U)
+          <p>The convolution support is defined as \(\mathbf{C}_s=\mathbf{U} diag(\hat{f}_s(\Lambda)) \mathbf{U}^T\), which describes how the nodes of a neighborhood are aggregated to update the central node. We can study the expressive power of the graph CNN by studying the spectrum of the convolution support, which correspond to:</p>
+          <p style="text-align:center;">\(\begin{aligned}
+                f_s(\Lambda) = diag^{-1}(\mathbf{U}^T \mathbf{C}_s \mathbf{U})
               \end{aligned}\)</p>
-          <p>This analysis is well-suited for Spectral Convolution, where the convolution support is well-defined as a </p>
+          <p>This analysis is well-suited for Spectral Convolution, where the convolution support is well-defined and we are sure that \(\mathbf{U}^T \mathbf{C}_s \mathbf{U}\) is a diagonal matrix.</p>
+
+          <div class="publications">
+            <h3 class="post-title">
+              <span class="font-weight-bold">Bibliography</span>
+            </h3>
+            <h2 class="year">2021</h2>
+            <ol class="bibliography">
+              <li>
+                <div class="row">
+                  <div id="balcilar2021" class="col-sm-8">
+                    <div class="title">Analyzing the Expressive Power of Graph Neural Networks in a Spectral Perspective</div>
+                    <div class="author">
+                      <em>Balcilar, M.</em>,
+                      Renton, G.,
+                      Heroux, P.,
+                      Gauzere, B.,
+                      Adam, S.,
+                      and Honeine, P.
+                    </div>
+                    <div class="periodical">
+                      <em>In ICLR</em>
+                      2021
+                    </div>
+                    <div class="links">
+                      <a href="https://openreview.net/pdf?id=-qh0M9XWxnv" class="btn btn-sm z-depth-0" role="button" target="_blank">PDF</a>
+                      <a href="https://github.com/balcilar/gnn-spectral-expressive-power" class="btn btn-sm z-depth-0" role="button" target="_blank">Code</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+            <h2 class="year">2020</h2>
+            <ol class="bibliography">
+              <li>
+                <div class="row">
+                  <div id="oono2020" class="col-sm-8">
+                    <div class="title">Graph Neural Networks Exponentially Lose Expressive Power for Node Classification</div>
+                    <div class="author">
+                      <em>Oono, K.</em>,
+                      and Suzuki, T.
+                    </div>
+                    <div class="periodical">
+                      <em>In ICLR</em>
+                      2020
+                    </div>
+                    <div class="links">
+                      <a href="https://openreview.net/pdf?id=S1ldO2EFPr" class="btn btn-sm z-depth-0" role="button" target="_blank">PDF</a>
+                      <a href="https://github.com/delta2323/gnn-asymptotics" class="btn btn-sm z-depth-0" role="button" target="_blank">Code</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="row">
+                  <div id="nt2019" class="col-sm-8">
+                    <div class="title">Revisiting Graph Neural Networks: All We Have is Low-Pass Filters</div>
+                    <div class="author">
+                      <em>NT, H.</em>,
+                      and Maehara, T.
+                    </div>
+                    <div class="periodical">
+                      <em>In ICPR</em>
+                      2020
+                    </div>
+                    <div class="links">
+                      <a href="https://arxiv.org/pdf/1905.09550.pdf" class="btn btn-sm z-depth-0" role="button" target="_blank">PDF</a>
+                      <a href="https://github.com/gear/gfnn" class="btn btn-sm z-depth-0" role="button" target="_blank">Code</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+            <h2 class="year">2019</h2>
+            <ol class="bibliography">
+              <li>
+                <div class="row">
+                  <div id="wu2019" class="col-sm-8">
+                    <div class="title">Simplifying Graph Convolutional Networks</div>
+                    <div class="author">
+                      <em>Wu, F.</em>,
+                      <em>Zhang, Z</em>,
+                      <em>Holanda de Souza Jr., Q.</em>,
+                      Fifty, C.,
+                      Yu, T.,
+                      and Weinberger, K.
+                    </div>
+                    <div class="periodical">
+                      <em>In ICML</em>
+                      2019
+                    </div>
+                    <div class="links">
+                      <a href="https://arxiv.org/pdf/1902.07153.pdf" class="btn btn-sm z-depth-0" role="button" target="_blank">PDF</a>
+                      <a href="https://github.com/Tiiiger/SGC" class="btn btn-sm z-depth-0" role="button" target="_blank">Code</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+            <h2 class="year">2018</h2>
+            <ol class="bibliography">
+              <li>
+                <div class="row">
+                  <div id="li2018" class="col-sm-8">
+                    <div class="title">Deeper insights into graph convolutional networks for semi-supervised learning</div>
+                    <div class="author">
+                      <em>Li, Q.</em>,
+                      Han, Z.,
+                      and Wu, X-M.
+                    </div>
+                    <div class="periodical">
+                      <em>In AAAI</em>
+                      2018
+                    </div>
+                    <div class="links">
+                      <a href="https://arxiv.org/pdf/1801.07606.pdf" class="btn btn-sm z-depth-0" role="button" target="_blank">PDF</a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
         </article>
       </div>
     </div>
